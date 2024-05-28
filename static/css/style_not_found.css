@@ -1,0 +1,6 @@
+body{
+    background-image: url("../img/pageNotFound.jpg");
+    height: 100%;
+    background-size: cover;
+    width: 100%;
+}
