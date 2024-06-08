@@ -1,0 +1,14 @@
+<nav>
+  <div class="nav-bg"></div>
+  <ul>
+    <li><a href='/'>Главная</a></li>
+      <li><a href='/main/menu'>Меню</a></li>
+    <li><a href='/main/shop'>Магазин</a></li>
+    <li><a href="/main/meeteng">Мероприятия</a></li>
+          {% if user.is_authenticated %} <!--Авторизован пользователь?-->
+          <li class="last"><a href="{% url 'profile' %}">{{user.username}}</a></li><li><a href="{% url 'logout' %}">Выйти</a></li>
+        {% else %}<!-- не авторизован-->
+          <li class="last"><a href="{% url 'login' %}">Войти</a></li><li><a href="{% url 'register' %}">Регистрация</a></li>
+        {% endif %}
+  </ul>
+</nav>
