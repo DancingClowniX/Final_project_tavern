@@ -2,33 +2,23 @@
     font-family: 'Lighthaus';
     src: local("Lighthaus"), url("../fonts/Lighthaus.ttf");
 }
-
 body {
     display: grid;
+    background: url("../img/wood.jpg");
   margin: 0;
   padding: 0;
-  background-image: url("../img/wood.jpg");
-  background-repeat: repeat-y;
-  overflow-x: hidden;
   width: 100%;
     height: 100%;
     background-size: 100%;
-}
-.welcome{
-    font-family: Lighthaus;
-    position: fixed;
-    width: 100%;
-	height: 0px;
-	top: 30%;
-	z-index: 999;
-    text-align: center;
-    color: coral;
-    text-shadow: 1px 1px 5px black;
+    background-repeat: repeat-y;
 }
 .welcome-head{
+    background-color: rgba(57, 49, 43, 0.5);
     font-family: Lighthaus;
+    align-items: center;
+    display: grid;
+    margin-top: 5%;
     font-size: 25px;
-    position: fixed;
     width: 100%;
 	height: 0px;
 	top: 45%;
@@ -36,19 +26,28 @@ body {
     text-align: center;
     color: coral;
     text-shadow: 1px 1px 5px black;
+    margin-bottom: 5%;
 }
 nav {
-    text-align: center;
     position: fixed;
+    right:0%;
+    display: grid;
+    grid-template-columns: 150px;
+    text-align: center;
     top: -5%;
-    width: 100%;
     z-index: 999;
   mask-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #ffffff 25%, #ffffff 75%, rgba(255, 255, 255, 0) 100%);
-  margin: 0 auto;
-  padding: 60px 0;
+  margin-top: 10%;
+  padding: 0;
 }
-
+.menu-items img{
+   max-heigh: 200px;
+    max-width: 300px;
+    margin: 2%;
+}
 nav ul {
+    margin: 0;
+    padding: 0;
   text-align: center;
   background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 25%, rgba(255, 255, 255, 0.2) 75%, rgba(255, 255, 255, 0) 100%);
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.1), inset 0 0 1px rgba(255, 255, 255, 0.6);
@@ -69,13 +68,23 @@ nav ul li a {
   display: block;
 }
 
+h6{
+    color: white;
+    width: auto;
+    font-family: Lighthaus;
+    margin: 5%;
+    text-shadow: 1px 1px 10px black;
+    display: inline-block;
+    background-color: rgba(57, 49, 43, 0.5);
+    border: solid;
+    padding: 1%;
+}
 nav ul li a:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1), inset 0 0 1px rgba(255, 255, 255, 0.6);
   background: rgba(255, 255, 255, 0.1);
-  color: white;
+  color: black;
     opacity: 0.7;
 }
-
 .footer{
     position: absolute;
 background:#000;
@@ -117,7 +126,13 @@ margin:0px 30px;
 font-size:2em;
 margin:0% 1%;
 }
+::-webkit-scrollbar {
+  width: 0;
+}
 
+.section{
+    background-color: aqua;
+}
 @media (max-width:720px){
 .footer{
 text-align:left;
@@ -132,10 +147,13 @@ text-align:left;
 margin:0% 3%;
 }
 }
+ol li{
+      list-style-type: none;
+    font-family: Lighthaus;
+    color: white;
+}
+ol li p{
+    color: white;
+}
 
-::-webkit-scrollbar {
-  width: 0;
-}
-.breadcrumbs{
-    color: bisque;
-}
+

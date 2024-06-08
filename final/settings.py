@@ -129,5 +129,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 LOGIN_REDIRECT_URL = 'main_url'
 LOGOUT_REDIRECT_URL = 'main_url'
 LOGIN_URL = 'templates'
+#LOGOUT_URL = "templates"
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 #moxy 6df7 qngl lagz 2rln xyln 55fo froc
