@@ -18,7 +18,8 @@
   <ul>
     <li><a href='{% url "main_url" %}'>Главная</a></li>
       <li><a href='/main/menu'>Меню</a></li>
-    <li><a href='/main/shop'>Магазин</a></li>
+    <li><a href='/shop'>Магазин</a></li>
+    <li><a href='/reserved'>Бронирование</a></li>
     <li><a href="/main/meeting">Мероприятия</a></li>
           {% if user.is_authenticated %} <!--Авторизован пользователь?-->
           <li class="last"><a href="{% url 'profile' %}">{{user.username}}</a></li><li><a href="{% url 'logout' %}">Выйти</a></li>
