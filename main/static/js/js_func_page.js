@@ -10778,4 +10778,3 @@ $(document).ready(function() {
     // Инициируем первый запрос
     sendRequest();
 });
-

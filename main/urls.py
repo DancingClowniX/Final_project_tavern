@@ -15,6 +15,8 @@ urlpatterns = [
     path('password-change/', PasswordChangeView.as_view(),name="password_change"),
     path('password-change/password-change-done/',PasswordChangeDoneView.as_view(),name="password_change_done"),
     path('main/meeting/', main.PageTemplate.as_view(),name='meeting'),
+    path('main/menu/<str:title>', main.showFood,name='show_food'),
+    path("product/<int:food_id>/", main.Food_Detail.as_view(), name="food_detail"),
 ]
 
 # urlpatterns = [

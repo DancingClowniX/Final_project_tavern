@@ -24,7 +24,7 @@
                     <div class="d-flex menu-items">
                         <img src="{{ item.image.url }}" class="img-fluid mb-5" height="200px" width="300px" >
                         <div class="d-flex flex-column">
-                            <h6>{{ item.title }}</h6>
+                            <h6><a href="{% url "show_food" item.title %}">{{ item.title }}</a></h6>
                             <br>
                             <h6>Цена: {{ item.price }} Руб.</h6>
                         </div>

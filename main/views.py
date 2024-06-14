@@ -15,7 +15,8 @@ from django.views.generic.edit import UpdateView
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import logout
-
+from shop.views import ShopPage
+from feedback.models import Feedback
 
 # Create your views here.
 def index(request):
@@ -93,13 +94,22 @@ def showCategory(request, category_id):
     }
     return render(request, 'food.html', context=data)
 
+def showFood(request,title):
+    menu_obj = get_object_or_404(Menu, title=title)
+    data = {
+        'food': menu_obj
+    }
+    return render(request,'food_item.html',context=data)
 
-    # def get_context_data(self, **kwargs):
-    #      context = super().get_context_data(**kwargs) # context - словарь
-    #      # m = model.objects.all()[:5]
-    #      # context['key'] = m
-    #      #context['title'] = 'Главная страница'
-    #      # context['menu'] = menu
-    #      # context['posts'] = Women.published.all().select_related('cat')
-    #      context['id'] = int(self.request.GET.get('id'))
-    #      return context
+class Food_Detail(DetailView):
+    model = Menu
+    template_name = 'food_item.html'
+    context_object_name = 'food'
+    pk_url_kwarg = 'food_id'  # Имя переменной в URL для первичного ключа
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        product = Menu.objects.get(id=self.kwargs['food_id']) # заменить
+        feedbacks = product.feedback_set.all()
+        context['feedbacks'] = feedbacks
+        return  context
