@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="">
+    <h2>ваш текущий  отзыв</h2>
+    <p>{{ id }}: {{ text }}</p>
+    <p>{{ date_created }}</p>
+</div>
+
+<h2>Отредактировать:</h2>
+
+
+  <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {% for field in add_feedback_form %}
+
+            {{field.label_tag}}
+            <div>{{field}}</div>
+
+
+            {% if field.errors%}
+            {% for error in field.errors %}
+            <div style="color:red;" class="alert alert-danger">
+                {{error}}
+            </div>
+            {% endfor %}
+            {% endif %}
+
+
+
+        {% endfor %}
+
+        <input type="submit" value="Отправить" >
+    </form>
+
+
+</body>
+</html>
