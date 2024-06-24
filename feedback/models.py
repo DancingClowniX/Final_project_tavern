@@ -1,11 +1,11 @@
+from django.contrib.auth.models import User
 from django.db import models
-from main.models import Menu
 
-# Create your models here.
 class Feedback(models.Model):
-    text = models.CharField(max_length=30)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    text = models.CharField(max_length=31)
     rating = models.IntegerField(default=0)
-    image = models.ImageField(upload_to='feedback_images/', blank=True, null=True)# фото
+    image = models.ImageField(upload_to='feedback_images/', blank=True, null=True)
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
-    food = models.ForeignKey(Menu, default=1, on_delete=models.CASCADE)
+    food = models.IntegerField(null=True)

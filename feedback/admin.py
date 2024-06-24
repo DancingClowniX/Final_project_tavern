@@ -4,5 +4,5 @@ from .models import Feedback
 # Register your models here.
 @admin.register(Feedback)
 class FeedbackAdmin(admin.ModelAdmin):
-    list_display = ('id', 'rating', 'food',)
+    list_display = ('id', 'rating', 'food', 'image')
     list_display_links = ('id', )
