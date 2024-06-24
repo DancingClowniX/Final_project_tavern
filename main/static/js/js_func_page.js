@@ -10778,3 +10778,17 @@ $(document).ready(function() {
     // Инициируем первый запрос
     sendRequest();
 });
+
+document.getElementById("myButton").addEventListener("click", function() {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "{% url 'init_feedback' %}", true);
+    xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+    xhr.onload = function() {
+        if (xhr.status >= 200 && xhr.status < 300) {
+            console.log("Запрос успешно выполнен!");
+        } else {
+            console.error("Произошла ошибка при выполнении запроса!");
+        }
+    };
+    xhr.send();
+});
