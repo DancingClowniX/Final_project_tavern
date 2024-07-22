@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content1 %}
+<h1> {{ food.title }}</h1>
+<img src="{{ food.image.url }}" class="img-fluid" height="200px" width="300px">
+<div class="accordion" id="accordionExample">
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button" type="button" id="myButton" data-bs-toggle="collapse"
+                data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Отзывы
+            </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                {% if user.is_authenticated %}
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for field in add_feedback_form %}
+                    {{field.label_tag}}
+                    <div>{{field}}</div>
+                    {% if field.errors%}
+                    {% for error in field.errors %}
+                    <div style="color:red;" class="alert alert-danger">
+                        {{error}}
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    {% endfor %}
+                    <input type="submit" value="Отправить">
+                </form>
+                {% else %}
+                <p>Чтобы оставить отзыв - авторизуйтесь.</p>
+                {% endif %}
+
+                <h2>Отзывы</h2>
+                {% if feedback %}
+                {% for item in feedback %}
+                <div style="background: lightblue;" id="{{ item.id }}">
+                    <p>{{ item.user.username }}</p>
+                    <p>Оценка: {{ item.rating }}</p>
+                    <p>{{ item.text }}</p>
+                    <p>дата создания: {{ item.date_created }}</p>
+                    {% if item.date_updated != None and item.date_updated != item.date_created %}
+                    <p>дата редактирования : {{ item.date_updated }}</p>
+                    {% endif %}
+                    {% if item.image %}
+                    <img src="{{ item.image.url }}">
+                    {% endif %}
+                    {% if item.user == user or user.is_staff %}
+                    <form method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <input type="hidden" name="fb_id" value="{{ item.id }}">
+                        <div>
+                            <button type="submit" name="delete">Удалить</button>
+                        </div>
+                    </form>
+                    {% endif %}
+                </div>
+                {% endfor %}
+                {% else %}
+                <p>Отзывов еще нет </p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

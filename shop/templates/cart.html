@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main_css %}
+{% endblock %}
+{% block content1 %}
+      <h1>Корзина</h1>
+    <div class="product-list">
+        {% if cart.items.exists %}
+    {% for item in cart.items.all %}
+    <div class="product-item">
+        <p>{{ item.product.title }} {{ item.quantity }}</p>
+        <img src="{{item.product.image.url}}" width="250px" height="300px">
+        <p>Price: ${{ item.product.price }}</p>
+         <a href="{% url 'shop:increase' item.product.id %}"><button>Добавить</button></a>
+        <a href="{% url 'shop:decrease' item.product.id %}"><button>Убрать</button></a>
+        <a href="{% url 'shop:remove_from_cart' item.product.id %}">Удалить</a>
+    </div>
+        {% endfor %}
+        {% else %}
+    <p>Твоя корзина пуста.</p>
+    </div>
+    {% endif %}
+    <p>Total Price: ${{ cart.get_total_price }}</p>
+    <a href="{% url 'shop:shop_page' %}">Продолжить покупку</a>
+</form>
+{% endblock %}

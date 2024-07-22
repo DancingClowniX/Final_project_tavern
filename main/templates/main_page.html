@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main_css %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+{% endblock %}
+{% block content1 %}
+<!--Содержимое страницы-->
+    <div class="hero">
+  <h1 class="welcome">Хмельной Джо</h1>
+</div>
+<!--Слайдер-->
+<div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active"  data-bs-interval="2000">
+      <img src="{% static "img/slider/slide1.jpg" %}" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item" data-bs-interval="2000">
+      <img src="{% static "img/slider/slide2.jpg" %}" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item" data-bs-interval="2000">
+      <img src="{% static "img/slider/slide3.jpg" %}" class="d-block w-100" alt="...">
+    </div>
+  </div>
+</div>
+{% endblock content1 %}

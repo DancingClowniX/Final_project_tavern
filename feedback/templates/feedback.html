@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content1 %}
+<h2>Ваш отзыв</h2>
+
+<h3>user_form</h3>
+
+{{ user_form }}
+
+
+<h3>add_feedback_form</h3>
+{% comment %}
+{{ add_feedback_form }}
+{% endcomment %}
+
+  <form method="POST"  enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {% for field in add_feedback_form %}
+
+            {{field.label_tag}}
+            <div>{{field}}</div>
+
+            {% if field.errors%}
+                {% for error in field.errors %}
+                    <div style="color:red;" class="alert alert-danger">
+                        {{error}}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+
+        {% endfor %}
+
+        <input type="submit" value="Отправить" >
+    </form>
+
+
+<h2>Отзывы</h2>
+
+{% for item in feedback %}
+<div style="background: lightblue;" id="{{ item.id }}">
+    <p>Оценка: {{ item.rating }}</p>
+    <p>{{ item.text }}</p>
+    <p>дата создания: {{ item.date_created }}</p>
+    {% if item.date_updated != None and item.date_updated != item.date_created %}
+        <p>дата редактирования : {{ item.date_updated }}</p>
+    {% endif %}
+
+    {% if item.image %}
+        <img src="{{ item.image.url }}">
+
+    {% endif %}
+
+
+    <a href="edit_feedback/{{ item.id }}/"><button>редактировать</button></a>
+    <a href="delete_feedback/{{ item.id }}/"><button>удалить</button></a>
+</div>
+{% endfor %}
+{% endblock %}

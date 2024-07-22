@@ -1,0 +1,166 @@
+@font-face {
+    font-family: 'Lighthaus';
+    src: local("Lighthaus"), url("../fonts/Lighthaus.ttf");
+}
+body {
+    display: grid;
+    background: url("../img/wood.jpg");
+  margin: 0;
+  padding: 0;
+  width: 100%;
+    height: 100%;
+    background-size: 100%;
+    background-repeat: repeat-y;
+}
+.welcome-head{
+    background-color: rgba(57, 49, 43, 0.5);
+    font-family: Lighthaus;
+    align-items: center;
+    display: grid;
+    margin-top: 5%;
+    font-size: 25px;
+    width: 100%;
+	height: 0px;
+	top: 45%;
+	z-index: 999;
+    text-align: center;
+    color: coral;
+    text-shadow: 1px 1px 5px black;
+    margin-bottom: 5%;
+}
+nav {
+    position: fixed;
+    right:0%;
+    display: grid;
+    grid-template-columns: 150px;
+    text-align: center;
+    top: -5%;
+    z-index: 999;
+  mask-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #ffffff 25%, #ffffff 75%, rgba(255, 255, 255, 0) 100%);
+  margin-top: 10%;
+  padding: 0;
+}
+.menu-items img{
+   max-heigh: 200px;
+    max-width: 300px;
+    margin: 2%;
+}
+nav ul {
+    margin: 0;
+    padding: 0;
+  text-align: center;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 25%, rgba(255, 255, 255, 0.2) 75%, rgba(255, 255, 255, 0) 100%);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.1), inset 0 0 1px rgba(255, 255, 255, 0.6);
+}
+
+nav ul li {
+  display: inline-block;
+}
+
+nav ul li a {
+  padding: 18px;
+  font-family: "Open Sans";
+  text-transform:uppercase;
+  color: coral;
+    opacity: 0.5;
+  font-size: 18px;
+  text-decoration: none;
+  display: block;
+}
+
+h6{
+    color: white;
+    width: auto;
+    font-family: Lighthaus;
+    margin: 5%;
+    text-shadow: 1px 1px 10px black;
+    display: inline-block;
+    background-color: rgba(57, 49, 43, 0.5);
+    border: solid;
+    padding: 1%;
+}
+nav ul li a:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1), inset 0 0 1px rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.1);
+  color: black;
+    opacity: 0.7;
+}
+.text_food{
+    font-family: Lighthaus;
+    font-size: 12px;
+    color: white;
+    margin: 5%;
+    background-color: rgba(57, 49, 43, 0.5);
+    border: solid;
+}
+.footer{
+background:#000;
+padding:30px 0px;
+font-family: 'Play', sans-serif;
+text-align:center;
+    width: 100%;
+    bottom: 0%;
+}
+
+.footer .row{
+width:100%;
+margin:1% 0%;
+padding:0.6% 0%;
+color:gray;
+font-size:0.8em;
+justify-content: center;
+}
+
+.footer .row a{
+text-decoration:none;
+color:gray;
+transition:0.5s;
+}
+
+.footer .row a:hover{
+color:#fff;
+}
+
+.footer .row ul{
+width:100%;
+}
+
+.footer .row ul li{
+display:inline-block;
+margin:0px 30px;
+}
+
+.footer .row a i{
+font-size:2em;
+margin:0% 1%;
+}
+::-webkit-scrollbar {
+  width: 0;
+}
+
+.section{
+    background-color: aqua;
+}
+@media (max-width:720px){
+.footer{
+text-align:left;
+padding:5%;
+}
+.footer .row ul li{
+display:block;
+margin:10px 0px;
+text-align:left;
+}
+.footer .row a i{
+margin:0% 3%;
+}
+}
+ol li{
+      list-style-type: none;
+    font-family: Lighthaus;
+    color: white;
+}
+ol li p{
+    color: white;
+}
+
