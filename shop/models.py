@@ -1,7 +1,7 @@
 from django.db import models
 from django.core.validators import MinLengthValidator
 from django.core.exceptions import ValidationError
-from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
 
 class Goods(models.Model):
     title = models.CharField(max_length=150,blank=True, null=True)
@@ -14,15 +14,14 @@ class Goods(models.Model):
 
 class CartItem(models.Model):
     product = models.ForeignKey(Goods, on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField(default=1)
+    quantity = models.PositiveIntegerField(default=0)
     cart = models.ForeignKey('Cart', on_delete=models.CASCADE, related_name='items')
 
     def get_total_price(self):
         return self.product.price * self.quantity
 
-
 class Cart(models.Model):
-    user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     def get_total_price(self):
-        return sum(item.get_total_price() for item in self.items.all())
+        return sum(item.get_total_price() for item in self.items.all())# откуда

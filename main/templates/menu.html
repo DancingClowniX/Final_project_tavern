@@ -6,12 +6,12 @@
 {% block content1 %}
     <section><h1 class="welcome-head">Меню</h1></section>
     <div class="container">
-        <div class="row d-none d-lg-block">
-                <ol class="crumb" style="display: flex">
+        <div class="content_crumbs">
+                <ol class="crumb">
                     <li class="url"><a href="{% url 'main_url' %}"><p>Главная/</p></a></li>
                     <li class="url"><a href="#"><p>Категории/</p></a></li>
                     {% for item in category %}
-                    <li class="url"><a href="{% url "show_cat" item.id %}"><p>{{ item.title }}/</p></a></li>
+                    <li class="url"><a href="{% url 'show_cat' item.id %}"><p>{{ item.title }}/</p></a></li>
                     {% endfor %}
                 </ol>
         </div>
@@ -24,13 +24,12 @@
                     <div class="d-flex menu-items">
                         <img src="{{ item.image.url }}" class="img-fluid mb-5" height="200px" width="300px" >
                         <div class="d-flex flex-column">
-                            <h6><a href="{% url "show_food" item.id %}">{{ item.title }}</a></h6>
+                            <h6><a href="{% url 'show_food' item.id %}">{{ item.title }}</a></h6>
                             <br>
                             <h6>Цена: {{ item.price }} Руб.</h6>
                         </div>
                     </div>
                 </div>
-
                 {% endfor %}
             </div>
         </div>

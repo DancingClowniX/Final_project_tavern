@@ -1,20 +1,16 @@
 <!-- templates/users/profile.html -->
-
-
-
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>PageNotFound</title>
-    <link rel="stylesheet" href="{% static 'css/style_not_found.css' %}" />
-
+    <title>Profile</title>
+    <link rel="stylesheet" href="{% static 'css/styleProf.css' %}" />
 </head>
 <body>
 
 <h1>Профиль</h1>
-
+<div class="prof">
 <form method="post" enctype="multipart/form-data">
 
     {% csrf_token %}
@@ -28,8 +24,6 @@
     {% else %}
         <p ><img src="/media/users/default.png">
     {% endif %}
-
     <p ><button type="submit">Сохранить</button></p>
-</form>
 </body>
 </html>

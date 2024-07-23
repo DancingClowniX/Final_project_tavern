@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from feedback.forms import AddFeedbackForm
-from .models import Menu, Category
+from .models import Menu, Category,News
 from django.views.generic import TemplateView
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.views import LoginView, LogoutView
@@ -16,35 +16,67 @@ from django.views.generic.edit import UpdateView
 from django.contrib.auth import get_user_model
 from .forms import ProfileUserForm
 from feedback.models import Feedback
-
+from shop.models import Cart, CartItem
+from shop.views import ShopPage
 
 def index(request):
-    return render(request, "main_page.html")
+    try:
+        cart = Cart.objects.get(user=request.user)
+        context = {
+            'cart': cart,
+        }
+        return render(request, "main_page.html", context)
+    except:
+        return render(request, "main_page.html")
+
 
 
 def menu(request):
     menu = Menu.objects.all()
     category = Category.objects.all()
-    data = {
-        "menu": menu,
-        "category": category
-    }
-    return render(request, "menu.html", context=data)
+    try:
+        cart = Cart.objects.get(user=request.user)
+        data = {
+            "menu": menu,
+            "category": category,
+            'cart': cart,
+        }
+        return render(request, "menu.html", context=data)
+    except:
+        data = {
+            "menu": menu,
+            "category": category,
+        }
+        return render(request, "menu.html", context=data)
 
 
 class PageTemplate(TemplateView):
     template_name = 'meeting.html'
+    news_obj = News.objects.all
     extra_context = {
-         'name': 'Template_View страница',
+         'news': news_obj,
     }
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        try:
+            cart = Cart.objects.get(user=self.request.user)
+        except Cart.DoesNotExist:
+            cart = None
+        context['cart'] = cart
+        return context
 
 
 def showCategory(request, category_id):
     cat_obj = get_object_or_404(Category, id=category_id)
     menu_items = cat_obj.menu_set.all()
+    try:
+        cart = Cart.objects.get(user=request.user)
+    except Cart.DoesNotExist:
+        cart = None
     data = {
         'category': cat_obj,
-        'menu_items': menu_items
+        'menu_items': menu_items,
+        'cart': cart
     }
 
     return render(request, 'food.html', context=data)
@@ -73,11 +105,15 @@ def showFood(request, eat_id):
 
     else:
         form = AddFeedbackForm()
-
+    try:
+        cart = Cart.objects.get(user=request.user)
+    except Cart.DoesNotExist:
+        cart = None
     data = {
         'food': menu_obj,
         'feedback': feedback_list,
         'add_feedback_form': form,
+        'cart':cart
     }
     return render(request, 'food_item.html', context=data)
 
@@ -136,3 +172,6 @@ class ProfileUser(LoginRequiredMixin, UpdateView):
     # Метод для получения объекта текущего пользователя
     def get_object(self, queryset=None):
         return self.request.user
+
+def privacy(request):
+    return render(request, 'privacy.html')

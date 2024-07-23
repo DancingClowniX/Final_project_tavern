@@ -20,6 +20,7 @@ urlpatterns = [
     path('main/menu/category/<int:category_id>', main.showCategory, name='show_cat'),
     path('main/meeting/', main.PageTemplate.as_view(),name='meeting'),
     path('main/menu/<int:eat_id>', main.showFood,name='show_food'),
+    path('main/privacy/', main.privacy,name='privacy'),
 ]
 
 

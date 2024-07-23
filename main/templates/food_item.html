@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block main_css %}
+    <link rel="stylesheet" href="{% static 'css/styleFoodItem.css' %}" />
+    {% endblock %}
 {% block content1 %}
+<section class="title">
 <h1> {{ food.title }}</h1>
+    </section>
 <img src="{{ food.image.url }}" class="img-fluid" height="200px" width="300px">
 <div class="accordion" id="accordionExample">
     <div class="accordion-item">
@@ -12,7 +17,7 @@
             </button>
         </h2>
         <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
+            <div class="accordion-body" style="background-color: gray">
                 {% if user.is_authenticated %}
                 <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}

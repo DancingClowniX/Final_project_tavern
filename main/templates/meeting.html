@@ -1,2 +1,35 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block main_css %}
+<link rel="stylesheet" href="{% static 'css/styleMeeting.css' %}"/>
+{% endblock %}
+{% block content1 %}
+<!--Содержимое страницы-->
+    <div class="hero">
+  <h1 class="welcome">Мероприятия</h1>
+</div>
+<!--Слайдер-->
+<div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active"  data-bs-interval="2000">
+      <img src="{% static "img/slider/slide1.jpg" %}" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item" data-bs-interval="2000">
+      <img src="{% static "img/slider/slide2.jpg" %}" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item" data-bs-interval="2000">
+      <img src="{% static "img/slider/slide3.jpg" %}" class="d-block w-100" alt="...">
+    </div>
+  </div>
+</div>
+      <div class="news">
+  {% for item in news %}
+    <h4 class="welcome2">{{item.title}}</h4>
+  <h4 class="welcome3">{{item.text}}</h4>
+  <img src="{{item.image.url}}" width="600px" height="400px"></br>
+        <a href="#">Записаться на турнир</a>
+  {%endfor%}
+        <iframe width="560" height="315"  src="https://www.youtube.com/embed/bhcHNR-3R0Q?controls=1&fs=0&modestbranding=1&rel=0&mute=1&showinfo=0&autoplay=1"
+                allow="autoplay; encrypted-media;"></iframe>
+</div>
+{% endblock content1 %}
