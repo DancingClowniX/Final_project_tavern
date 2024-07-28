@@ -4,22 +4,22 @@
 }
 body {
     display: grid;
-    background: url("../img/wood.jpg");
+    background-image: url("../img/wood.jpg");
   margin: 0;
   padding: 0;
-  width: 100%;
     background-size: 100%;
     background-repeat: repeat-y;
     height: 100vh;
+    height: 100%;
 }
 .welcome-head{
     background-color: rgba(57, 49, 43, 0.5);
     font-family: Lighthaus;
     align-items: center;
+    justify-content: center;
     display: grid;
     margin-top: 5%;
     font-size: 25px;
-    width: 100%;
 	height: 0px;
 	top: 45%;
 	z-index: 999;
@@ -28,17 +28,24 @@ body {
     text-shadow: 1px 1px 5px black;
     margin-bottom: 5%;
 }
+.welcome-head span{
+    background-color: rgba(57, 49, 43, 0.7);
+    width: 300px;
+}
+body{
+    text-decoration: none;
+}
 nav {
     position: fixed;
-    right:0%;
+    right:1%;
     display: grid;
-    grid-template-columns: 150px;
+    grid-template-columns: 180px;
     text-align: center;
     top: -5%;
     z-index: 999;
-  mask-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #ffffff 25%, #ffffff 75%, rgba(255, 255, 255, 0) 100%);
-  margin-top: 10%;
-  padding: 0;
+    color: black;
+    margin-top: 10%;
+    padding: 0;
 }
 .menu-items img{
    max-heigh: 200px;
@@ -49,12 +56,22 @@ nav ul {
     margin: 0;
     padding: 0;
   text-align: center;
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 25%, rgba(255, 255, 255, 0.2) 75%, rgba(255, 255, 255, 0) 100%);
+  /*background: linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(255, 255, 255, 0.2) 25%, rgba(255, 255, 255, 0.2) 75%, rgba(255, 255, 255, 0) 100%);*/
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.1), inset 0 0 1px rgba(255, 255, 255, 0.6);
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
 }
 
 nav ul li {
   display: inline-block;
+}
+.menu-items{
+    display: flex;
+    margin: 30px;
+}
+.img_hover:hover{
+    transition: 1s;
+        scale: 1.1;
 }
 
 nav ul li a {
@@ -62,10 +79,10 @@ nav ul li a {
   font-family: "Open Sans";
   text-transform:uppercase;
   color: coral;
-    opacity: 0.5;
   font-size: 18px;
   text-decoration: none;
   display: block;
+    text-decoration: none;
 }
 
 h6{
@@ -76,8 +93,12 @@ h6{
     text-shadow: 1px 1px 10px black;
     display: inline-block;
     background-color: rgba(57, 49, 43, 0.5);
-    border: solid;
     padding: 1%;
+    text-decoration: none;
+}
+h6 a{
+    text-decoration: none;
+    color: white;
 }
 nav ul li a:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1), inset 0 0 1px rgba(255, 255, 255, 0.6);
@@ -91,7 +112,7 @@ nav ul li a:hover {
     color: white;
     margin: 5%;
     background-color: rgba(57, 49, 43, 0.5);
-    border: solid;
+    width: 300px
 }
 .footer{
     position: absolute;
@@ -100,7 +121,6 @@ padding:30px 0px;
 font-family: 'Play', sans-serif;
 text-align:center;
     width: 100%;
-    flex: 0 0 auto;
 }
 
 .footer .row{
@@ -139,12 +159,10 @@ margin:0% 1%;
   width: 0;
 }
 .container{
-    margin-top: -10%;
+    margin-top: -5%;
 }
 .container_one{
-    position: absolute;
-    margin-top: -20%;
-    width: auto;
+    margin-top: -5%;
 }
 html{
     height: 100vh;

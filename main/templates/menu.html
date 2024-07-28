@@ -21,8 +21,8 @@
             <div class="row">
                 {% for item in menu %}
                 <div class="col-xl-6 col-12">
-                    <div class="d-flex menu-items">
-                        <img src="{{ item.image.url }}" class="img-fluid mb-5" height="200px" width="300px" >
+                    <div class="menu-items">
+                        <a href="{% url 'show_food' item.id %}"><img src="{{ item.image.url }}" class="img_hover" height="200px" width="300px"></a>
                         <div class="d-flex flex-column">
                             <h6><a href="{% url 'show_food' item.id %}">{{ item.title }}</a></h6>
                             <br>

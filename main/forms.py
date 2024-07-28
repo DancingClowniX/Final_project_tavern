@@ -1,9 +1,11 @@
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.forms import CharField, Form
 from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 import datetime
 from django.contrib.auth import get_user_model
+from django.contrib.auth.views import PasswordChangeForm, SetPasswordForm, PasswordResetForm
 
 class LoginUserForm(AuthenticationForm):
     username = forms.CharField(label='Логин или Email', widget=forms.TextInput(attrs={'class': 'form-input'}))
@@ -52,3 +54,5 @@ class ProfileUserForm(forms.ModelForm):
             'first_name': forms.TextInput(attrs={'class': 'form-input'}),
             'last_name': forms.TextInput(attrs={'class': 'form-input'}),
         }
+class UserPasswordChangeForm(PasswordChangeForm):
+    old_password = forms.CharField(label = 'Старый пароль', widget = forms.PasswordInput(attrs={'class':'form-input'}))

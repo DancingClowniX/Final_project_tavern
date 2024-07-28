@@ -43,9 +43,6 @@ class ShopPage(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-
-
-
         # Получение исходного списка товаров
         products = Goods.objects.all()
 
@@ -57,6 +54,7 @@ class ShopPage(TemplateView):
 
         # Получение номера страницы из GET-параметра
         page = self.request.GET.get('page')
+
         try:
             # Получение запрошенной страницы
             product_page = paginator.page(page)
@@ -65,6 +63,7 @@ class ShopPage(TemplateView):
             context['product_page'] = product_page
 
             cart = Cart.objects.get(user=self.request.user)
+            context['cart'] = cart
         except PageNotAnInteger:
             # Если номер страницы не является целым числом, отображаем первую страницу
             product_page = paginator.page(1)
@@ -72,17 +71,20 @@ class ShopPage(TemplateView):
             # Добавление объекта первой страницы в контекст
             context['product_page'] = product_page
 
+            cart = Cart.objects.get(user=self.request.user)
+            context['cart'] = cart
         except EmptyPage:
             # Если номер страницы находится за пределами диапазона, отображаем последнюю страницу
             product_page = paginator.page(paginator.num_pages)
 
             # Добавление объекта последней страницы в контекст
             context['product_page'] = product_page
-        except Cart.DoesNotExist:
-            cart = None
-            context['cart'] = cart
-        return context
 
+            cart = Cart.objects.get(user=self.request.user)
+            context['cart'] = cart
+            return context
+        finally:
+            return context
 
 @login_required
 def add_to_cart(request, product_id):

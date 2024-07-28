@@ -5,6 +5,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+
 class News(models.Model):
     title = models.CharField(max_length=150,blank=True, null=True)
     text = models.CharField(max_length=150,blank=True, null=True)
@@ -33,4 +34,3 @@ class Menu(models.Model):
     class Meta:
         verbose_name = 'Меню'
         verbose_name_plural = 'Меню'
-

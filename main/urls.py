@@ -2,6 +2,8 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.urls import path
 import main.views as main
+from django.contrib.auth.views import PasswordChangeDoneView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
+from django.urls import reverse_lazy
 
 
 urlpatterns = [
@@ -12,8 +14,10 @@ urlpatterns = [
     path('main/logout/', main.logout_user, name="logout"),
     path('main/register/', main.RegisterUser.as_view(), name="register"),
     path('main/profile/', main.ProfileUser.as_view(), name="profile"),
-    # path('password-change/', PasswordChangeView.as_view(),name="password_change"),
-    # path('password-change/password-change-done/',PasswordChangeDoneView.as_view(),name="password_change_done"),
+    path('password-change/', main.UserPasswordChange.as_view(), name="password_change"),
+    path('password-change/done/', PasswordChangeDoneView.as_view(template_name='password_change_done.html'),
+         name="password_change_done"),
+
 
     # Остальное 🔽
     path('main/menu/', main.menu, name="menu"),

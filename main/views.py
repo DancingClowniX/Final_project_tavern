@@ -3,7 +3,7 @@ from feedback.forms import AddFeedbackForm
 from .models import Menu, Category,News
 from django.views.generic import TemplateView
 from django.shortcuts import get_object_or_404
-from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView
 from .forms import LoginUserForm
 from django.views.generic.edit import CreateView
 from .forms import RegisterUserForm
@@ -18,6 +18,7 @@ from .forms import ProfileUserForm
 from feedback.models import Feedback
 from shop.models import Cart, CartItem
 from shop.views import ShopPage
+from main.forms import UserPasswordChangeForm
 
 def index(request):
     try:
@@ -60,26 +61,30 @@ class PageTemplate(TemplateView):
         context = super().get_context_data(**kwargs)
         try:
             cart = Cart.objects.get(user=self.request.user)
+            context['cart'] = cart
         except Cart.DoesNotExist:
             cart = None
-        context['cart'] = cart
-        return context
+            context['cart'] = cart
+            return context
+        finally:
+            return context
 
 
 def showCategory(request, category_id):
     cat_obj = get_object_or_404(Category, id=category_id)
     menu_items = cat_obj.menu_set.all()
-    try:
-        cart = Cart.objects.get(user=request.user)
-    except Cart.DoesNotExist:
-        cart = None
     data = {
         'category': cat_obj,
         'menu_items': menu_items,
-        'cart': cart
     }
-
-    return render(request, 'food.html', context=data)
+    try:
+        cart = Cart.objects.get(user=request.user)
+        data['cart'] = cart
+        return render(request, 'food.html', context=data)
+    except Cart.DoesNotExist:
+        return render(request, 'food.html', context=data)
+    finally:
+        return render(request, 'food.html', context=data)
 
 
 def showFood(request, eat_id):
@@ -102,20 +107,21 @@ def showFood(request, eat_id):
                 feedback_instance.user = request.user
                 feedback_instance.save()
                 return redirect('show_food', eat_id=eat_id)
-
     else:
         form = AddFeedbackForm()
+        data = {
+            'food': menu_obj,
+            'feedback': feedback_list,
+            'add_feedback_form': form,
+        }
     try:
         cart = Cart.objects.get(user=request.user)
+        data['cart'] = cart
+        return render(request, 'food_item.html', context=data)
     except Cart.DoesNotExist:
-        cart = None
-    data = {
-        'food': menu_obj,
-        'feedback': feedback_list,
-        'add_feedback_form': form,
-        'cart':cart
-    }
-    return render(request, 'food_item.html', context=data)
+        return render(request, 'food_item.html', context=data)
+    finally:
+        return render(request, 'food_item.html', context=data)
 
 
 class LoginPage(LoginView):
@@ -175,3 +181,11 @@ class ProfileUser(LoginRequiredMixin, UpdateView):
 
 def privacy(request):
     return render(request, 'privacy.html')
+
+class UserPasswordChange(PasswordChangeView):
+    form_class = UserPasswordChangeForm
+    template_name = 'password_change_form.html'
+    extra_context = {'title': "Изменение пароля"}
+
+    def get_success_url(self):
+        return reverse_lazy('password_change_done')

@@ -65,7 +65,14 @@ ol{
 nav ul li {
   display: inline-block;
 }
-
+.menu-items{
+    display: flex;
+    margin: 30px;
+}
+.img_hover:hover{
+    transition: 1s;
+        scale: 1.1;
+}
 nav ul li a {
   padding: 18px;
   font-family: "Open Sans";
@@ -74,6 +81,7 @@ nav ul li a {
   font-size: 18px;
   text-decoration: none;
   display: block;
+    text-decoration: none;
 }
 
 h6{
@@ -84,8 +92,12 @@ h6{
     text-shadow: 1px 1px 10px black;
     display: inline-block;
     background-color: rgba(57, 49, 43, 0.5);
-    border: solid;
     padding: 1%;
+    text-decoration: none;
+}
+h6 a{
+    text-decoration: none;
+    color: white;
 }
 nav ul li a:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1), inset 0 0 1px rgba(255, 255, 255, 0.6);

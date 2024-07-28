@@ -4,18 +4,44 @@
 }
 
 body {
-    display: grid;
     background: url("../img/wood.jpg");
-  margin: 0;
-  padding: 0;
-  width: 100%;
+    width: 100%;
     background-size: 100%;
     background-repeat: repeat-y;
-    height: 100%;
-    height: 100vh;
+    display: flex;
+    min-height: 100vh;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+}
+h3{
+    justify-content: center;
+    margin-left: 20%;
+    color: coral;
+    font-family: Lighthaus;
+}
+h3 span{
+    background-color: rgba(57, 49, 43, 0.7);
+}
+.wrapper_content{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
 }
 .icon_basket{
     border-radius: 40%;
+}
+h1{
+    font-family: Lighthaus;
+    color: coral;
+    margin-left: 10%;
+}
+h1 span{
+    background-color: rgba(57, 49, 43, 0.7);
+}
+body{
+    text-decoration: none;
 }
 .welcome{
     font-family: Lighthaus;
@@ -28,6 +54,7 @@ body {
     color: coral;
     text-shadow: 1px 1px 5px black;
 }
+
 .welcome-head{
     font-family: Lighthaus;
     font-size: 25px;
@@ -44,17 +71,21 @@ nav {
     text-align: center;
     position: fixed;
     top: -5%;
-    width: 100%;
     z-index: 999;
-  mask-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #ffffff 25%, #ffffff 75%, rgba(255, 255, 255, 0) 100%);
   margin: 0 auto;
   padding: 60px 0;
+    color: black;
+    width: 100%;
 }
 
 nav ul {
+    margin: 0;
+    padding: 0;
   text-align: center;
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 25%, rgba(255, 255, 255, 0.2) 75%, rgba(255, 255, 255, 0) 100%);
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.1), inset 0 0 1px rgba(255, 255, 255, 0.6);
+  /*background: linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(255, 255, 255, 0.2) 25%, rgba(255, 255, 255, 0.2) 75%, rgba(255, 255, 255, 0) 100%);*/
+  color: coral;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
 }
 
 nav ul li {
@@ -66,10 +97,10 @@ nav ul li a {
   font-family: "Open Sans";
   text-transform:uppercase;
   color: coral;
-    opacity: 0.5;
   font-size: 18px;
   text-decoration: none;
   display: block;
+    text-decoration: none;
 }
 
 nav ul li a:hover {
@@ -139,9 +170,16 @@ margin:0% 3%;
 ::-webkit-scrollbar {
   width: 0;
 }
-.breadcrumbs{
-    color: bisque;
-}
 .title{
     margin-top: 5%;
+}
+.accordion{
+    min-width: 300px;
+}
+.image_content{
+    margin-left: 20%;
+}
+.accordion-item{
+    margin-right: 10%;
+    display: grid;
 }

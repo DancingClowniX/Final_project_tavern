@@ -5,19 +5,22 @@
     {% endblock %}
 {% block content1 %}
 <section class="title">
-<h1> {{ food.title }}</h1>
+<h1><span>{{ food.title }}</span></h1>
     </section>
-<img src="{{ food.image.url }}" class="img-fluid" height="200px" width="300px">
-<div class="accordion" id="accordionExample">
+ <section class="wrapper_content">
+ <div class="image_content">
+<img src="{{ food.image.url }}" height="400px" width="600px">
+ </div>
+<div class="accordion " id="accordionExample">
     <div class="accordion-item">
         <h2 class="accordion-header">
             <button class="accordion-button" type="button" id="myButton" data-bs-toggle="collapse"
                 data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                Отзывы
+                <h5>Отызвы</h5>
             </button>
         </h2>
         <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-            <div class="accordion-body" style="background-color: gray">
+            <div class="accordion-body" style="background-color: coral">
                 {% if user.is_authenticated %}
                 <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
@@ -41,7 +44,7 @@
                 <h2>Отзывы</h2>
                 {% if feedback %}
                 {% for item in feedback %}
-                <div style="background: lightblue;" id="{{ item.id }}">
+                <div class="forma" style="background: gray;" id="{{ item.id }}">
                     <p>{{ item.user.username }}</p>
                     <p>Оценка: {{ item.rating }}</p>
                     <p>{{ item.text }}</p>
@@ -50,7 +53,9 @@
                     <p>дата редактирования : {{ item.date_updated }}</p>
                     {% endif %}
                     {% if item.image %}
+                        <div img_content>
                     <img src="{{ item.image.url }}">
+                        </div>
                     {% endif %}
                     {% if item.user == user or user.is_staff %}
                     <form method="post" style="display:inline;">
@@ -70,4 +75,8 @@
         </div>
     </div>
 </div>
+ <div>
+<h3><span>{{ food.text }}</span></h3>
+ </div>
+</section>
 {% endblock %}
