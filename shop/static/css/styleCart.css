@@ -2,34 +2,44 @@
     font-family: 'Lighthaus';
     src: local("Lighthaus"), url("../fonts/Lighthaus.ttf");
 }
-body {
-    display: grid;
-    background-image: url("../img/lavka.jpg");
+body,html {
   margin: 0;
-  padding: 0;
-    background-size: cover;
-    background-repeat: no-repeat;
+    background-size: 100%;
+    background-repeat: repeat-y;
     height: 100vh;
 }
-section{
-    margin-top: 10%;
+.section-cart{
+    min-height: 100%;
 }
-.welcome-head{
-    background-color: rgba(57, 49, 43, 0.5);
-    font-family: Lighthaus;
-    align-items: center;
+.cart-header{
+    background-color: #EAEFF2;
+    padding: 22px 0;
     display: grid;
-    margin-top: 5%;
-    font-size: 25px;
-    width: 100%;
-	height: 0px;
-	top: 45%;
-	z-index: 999;
-    text-align: center;
-    color: coral;
-    text-shadow: 1px 1px 5px black;
-    margin-bottom: 5%;
+    grid-template-columns: 2fr 3fr 3fr 3fr 1fr;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 120%;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-family: Lighthaus;
 }
+.cart-header_title{
+    grid-column-start: 2;
+}
+
+.cart-footer{
+display: grid;
+    grid-template-columns: 5fr 3fr 4fr;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.2;
+    padding: 19px 0;
+}
+.cart-footer_count{
+    grid-column-start: 2;
+}
+
+
 nav {
     position: fixed;
     right:1%;
@@ -37,7 +47,7 @@ nav {
     grid-template-columns: 180px;
     text-align: center;
     z-index: 999;
-    margin-top: 10%;
+    margin-top: 5%;
 
 }
 nav ul {
@@ -63,17 +73,7 @@ nav ul li a {
   display: block;
 }
 
-h6{
-    color: white;
-    width: auto;
-    font-family: Lighthaus;
-    margin: 5%;
-    text-shadow: 1px 1px 10px black;
-    display: inline-block;
-    background-color: rgba(57, 49, 43, 0.5);
-    border: solid;
-    padding: 1%;
-}
+
 nav ul li a:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1), inset 0 0 1px rgba(255, 255, 255, 0.6);
   background: rgba(255, 255, 255, 0.1);
@@ -86,7 +86,8 @@ background:#000;
 padding:30px 0px;
 font-family: 'Play', sans-serif;
 text-align:center;
-    width: 100%;
+width: 100%;
+height: 260px; /* Высота блока footer */
 }
 
 .footer .row{
@@ -124,43 +125,31 @@ margin:0% 1%;
 ::-webkit-scrollbar {
   width: 0;
 }
-.menu_items{
-    background-color: rgba(0, 0, 0, 0.5);
-    width: 300px;
-    grid-column: 2;
-}
-.pagination{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-@media (max-width:720px){
-.footer{
-text-align:left;
-padding:5%;
-}
-.footer .row ul li{
-display:block;
-margin:10px 0px;
-text-align:left;
-}
-.footer .row a i{
-margin:0% 3%;
-}
-}
-ol li{
-      list-style-type: none;
-    font-family: Lighthaus;
-    color: white;
-}
-ol li p{
-    color: white;
+
+
+@media (max-width:720px) {
+    .footer {
+        text-align: left;
+        padding: 5%;
+    }
+
+    .footer .row ul li {
+        display: block;
+        margin: 10px 0px;
+        text-align: left;
+    }
+
+    .footer .row a i {
+        margin: 0% 3%;
+    }
 }
 
-.img-fluid mb-5:hover{
-    scale: 0.5;
+.product{
+    display: grid;
+    grid-template-columns: 2fr repeat(3, 3fr) 1fr;
 }
-.current{
-    font-family: Lighthaus;
-    color: coral;
-}
+.product_img {}
+.product_title{}
+.product_count {}
+.product_price{}
+.product_control{}

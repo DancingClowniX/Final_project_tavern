@@ -1,26 +1,48 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block main_css %}
+    <link rel="stylesheet" href="{% static 'css/styleCart.css' %}"/>
 {% endblock %}
 {% block content1 %}
-      <h1>Корзина</h1>
-    <div class="product-list">
-        {% if cart.items.exists %}
-    {% for item in cart.items.all %}
-    <div class="product-item">
-        <p>{{ item.product.title }} {{ item.quantity }}</p>
-        <img src="{{item.product.image.url}}" width="250px" height="300px">
-        <p>Price: ${{ item.product.price }}</p>
-         <a href="{% url 'shop:increase' item.product.id %}"><button>Добавить</button></a>
-        <a href="{% url 'shop:decrease' item.product.id %}"><button>Убрать</button></a>
-        <a href="{% url 'shop:remove_from_cart' item.product.id %}">Удалить</a>
+    <section class="section-cart">
+    <header class="section-cart_header">
+        <div class="container">
+            <h1 class="title-1">Корзина товаров</h1>
+        </div>
+    </header>
+    <div class="section-cart_body">
+        <div class="container">
+            <section class="cart">
+                {% if cart.items.exists %}
+                            {% for item in cart.items.all %}
+                <header class="cart-header">
+                    <div class="cart-header_title">Наименование</div>
+                    <div class="cart-header_count">Количество</div>
+                    <div class="cart-header_cost">Стоимость</div>
+                </header>
+                <section class="product">
+                    <div class="product_img"><img src="{{item.product.image.url}}" width="180px" height="200x"></div>
+                    <div class="product_title">{{ item.product.title }}</div>
+                    <div class="product_count">{{ item.quantity }}
+                    <a href="{% url 'shop:increase' item.product.id %}"><button class="btn btn-dark">+</button></a>
+                    <a href="{% url 'shop:decrease' item.product.id %}"><button class="btn btn-dark">-</button></a>
+                    </div>
+                    <div class="product_price"><p>Price: ${{ item.product.price }}</p></div>
+                    <div class="product_control"><a href="{% url 'shop:remove_from_cart' item.product.id %}"><button class="btn btn-dark">Удалить</button></a></div>
+
+                </section>
+                    {% endfor %}
+                <div class="cart-footer">
+                    <div class="cart-footer_count">единицы</div>
+                    <div class="cart-footer_price">${{ cart.get_total_price }}</div>
+                </div>
+                            {% else %}
+                            <p>Твоя корзина пуста.</p>
+                            {% endif %}
+            </section>
+            <a href="{% url 'shop:shop_page' %}"><button class="btn btn-dark">Продолжить покупку</button></a>
+        </div>
     </div>
-        {% endfor %}
-        {% else %}
-    <p>Твоя корзина пуста.</p>
-    </div>
-    {% endif %}
-    <p>Total Price: ${{ cart.get_total_price }}</p>
-    <a href="{% url 'shop:shop_page' %}">Продолжить покупку</a>
-</form>
+    </section>
 {% endblock %}
+
