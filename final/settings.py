@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     'shop.apps.ShopConfig',
     'feedback.apps.FeedbackConfig',
+    'reserved.apps.ReservedConfig',
 ]
 
 MIDDLEWARE = [

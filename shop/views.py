@@ -32,8 +32,6 @@ class ShoppingCart(TemplateView):
             cart = None
         context['cart'] = cart
         return context
-
-
 class ShopPage(TemplateView):
     template_name = 'shop.html'
     goods = Goods.objects.all()
@@ -93,6 +91,7 @@ def add_to_cart(request, product_id):
     cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
     cart_item.quantity += 1
     cart_item.save()
+    cart.save()
     return redirect('shop:shop_cart')
 
 
@@ -110,6 +109,7 @@ def increase(request, product_id):
     cart_item = get_object_or_404(CartItem, cart=cart, product_id=product_id)
     cart_item.quantity += 1
     cart_item.save()
+    cart.save()
     return redirect('shop:shop_cart')
 
 @login_required
@@ -122,3 +122,4 @@ def decrease(request, product_id):
         cart_item.quantity -= 1
         cart_item.save()
     return redirect('shop:shop_cart')
+

@@ -24,18 +24,20 @@
                     <div class="product_img"><img src="{{item.product.image.url}}" width="180px" height="200x"></div>
                     <div class="product_title">{{ item.product.title }}</div>
                     <div class="product_count">{{ item.quantity }}
+                    На складе: {{ item.product.quantity }}
+                        {% if item.product.quantity != item.quantity %}
                     <a href="{% url 'shop:increase' item.product.id %}"><button class="btn btn-dark">+</button></a>
-                    <a href="{% url 'shop:decrease' item.product.id %}"><button class="btn btn-dark">-</button></a>
+                        {% endif %}
+                    <a href="{% url 'shop:decrease' item.product.id %}"><button class="btn btn-dark">-</button></a><br>
                     </div>
                     <div class="product_price"><p>Price: ${{ item.product.price }}</p></div>
-                    <div class="product_control"><a href="{% url 'shop:remove_from_cart' item.product.id %}"><button class="btn btn-dark">Удалить</button></a></div>
-
-                </section>
+                    <div class="product_control"><a href="{% url 'shop:remove_from_cart' item.product.id %}"><button class="btn btn-dark">Удалить</button></a></div>                </section>
                     {% endfor %}
                 <div class="cart-footer">
-                    <div class="cart-footer_count">единицы</div>
+                    <div class="cart-footer_count">{{ cart.get_total_quantity }}</div>
                     <div class="cart-footer_price">${{ cart.get_total_price }}</div>
                 </div>
+                    <a href=#><button class="btn btn-dark" id="order">Оформить заказ</button></a>
                             {% else %}
                             <p>Твоя корзина пуста.</p>
                             {% endif %}
