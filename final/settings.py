@@ -25,7 +25,9 @@ SECRET_KEY = 'django-insecure-=gyerlds##t=95wakceq5$7p(sh*4i#wt8^9q6sa*7#jg&8!da
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1','58d7-109-124-252-122.ngrok-free.app']
+
+CSRF_TRUSTED_ORIGINS = ['https://58d7-109-124-252-122.ngrok-free.app']
 
 
 # Application definition
@@ -41,6 +43,7 @@ INSTALLED_APPS = [
     'shop.apps.ShopConfig',
     'feedback.apps.FeedbackConfig',
     'reserved.apps.ReservedConfig',
+    'order',
 ]
 
 MIDDLEWARE = [
@@ -134,4 +137,4 @@ LOGOUT_REDIRECT_URL = 'main_url'
 LOGIN_URL = 'templates'
 #LOGOUT_URL = "templates"
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-#moxy 6df7 qngl lagz 2rln xyln 55fo froc
+#npee anrm zebr qwon

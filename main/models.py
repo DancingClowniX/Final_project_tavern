@@ -34,3 +34,5 @@ class Menu(models.Model):
     class Meta:
         verbose_name = 'Меню'
         verbose_name_plural = 'Меню'
+class Tournament(models.Model):
+    listPerson = models.CharField(max_length=150,blank=True, null=True)

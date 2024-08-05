@@ -19,6 +19,9 @@ from feedback.models import Feedback
 from shop.models import Cart, CartItem
 from shop.views import ShopPage
 from main.forms import UserPasswordChangeForm
+from django.contrib.auth.models import User
+from main.models import Tournament
+
 
 def index(request):
     try:
@@ -181,7 +184,8 @@ class ProfileUser(LoginRequiredMixin, UpdateView):
 
 def privacy(request):
     return render(request, 'privacy.html')
-
+def contacts(request):
+    return render(request, 'contacts.html')
 class UserPasswordChange(PasswordChangeView):
     form_class = UserPasswordChangeForm
     template_name = 'password_change_form.html'
@@ -189,3 +193,6 @@ class UserPasswordChange(PasswordChangeView):
 
     def get_success_url(self):
         return reverse_lazy('password_change_done')
+
+
+

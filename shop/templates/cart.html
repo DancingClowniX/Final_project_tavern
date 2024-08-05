@@ -37,7 +37,7 @@
                     <div class="cart-footer_count">{{ cart.get_total_quantity }}</div>
                     <div class="cart-footer_price">${{ cart.get_total_price }}</div>
                 </div>
-                    <a href=#><button class="btn btn-dark" id="order">Оформить заказ</button></a>
+                    <a href={% url "order:cart_pay" cart.id %}><button class="btn btn-dark" id="order">Оформить заказ</button></a>
                             {% else %}
                             <p>Твоя корзина пуста.</p>
                             {% endif %}
@@ -48,3 +48,4 @@
     </section>
 {% endblock %}
 
+з

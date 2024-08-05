@@ -9,10 +9,9 @@ from shop.models import Cart, CartItem
 from shop.models import Goods
 from django.core.paginator import Paginator,PageNotAnInteger, EmptyPage
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from order.models import Order
 class ShoppingCart(TemplateView):
     model = get_user_model()  # Используем модель пользователя
-    # form_class = ProfileUserForm  # Форма профиля пользователя
     template_name = 'cart.html'  # Шаблон для профиля пользователя
     extra_context = {'title': "Корзина товаров"} #'default_image': settings.DEFAULT_USER_IMAGE}
 
@@ -32,12 +31,11 @@ class ShoppingCart(TemplateView):
             cart = None
         context['cart'] = cart
         return context
+
+
+
 class ShopPage(TemplateView):
     template_name = 'shop.html'
-    goods = Goods.objects.all()
-    extra_context = {
-        'goods': goods,
-    }
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 

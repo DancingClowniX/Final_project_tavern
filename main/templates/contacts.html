@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main_css %}
+<link rel="stylesheet" href="{% static 'css/styleContacts.css' %}"/>
+{% endblock %}
+{% block content1 %}
+    <h1 class="welcome">Контакты</h1>
+
+    <div class="map">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13519.779698398326!2d-1.080103957133479!3d53.200239447634885!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4879bb3424bd4a49%3A0xb7a65cdab79dbf30!2z0KjQtdGA0LLRg9C0INCk0L7RgNC10YHRgg!5e0!3m2!1sru!2sru!4v1722710376311!5m2!1sru!2sru" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <h4 class="number">Тел. 8-900-999-999 - Магистр Джарвис</h4>
+        </div>
+    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active"  data-bs-interval="2000">
+      <img src="{% static "img/slider/slide1.jpg" %}" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item" data-bs-interval="2000">
+      <img src="{% static "img/slider/slide2.jpg" %}" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item" data-bs-interval="2000">
+      <img src="{% static "img/slider/slide3.jpg" %}" class="d-block w-100" alt="...">
+    </div>
+  </div>
+</div>
+{% endblock %}

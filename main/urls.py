@@ -25,6 +25,8 @@ urlpatterns = [
     path('main/meeting/', main.PageTemplate.as_view(),name='meeting'),
     path('main/menu/<int:eat_id>', main.showFood,name='show_food'),
     path('main/privacy/', main.privacy,name='privacy'),
+    path('main/contacts/', main.contacts,name='contacts'),
+    # path('main/meetinf/<str:user_username>',main.get_person,name='get_person')
 ]
 
 

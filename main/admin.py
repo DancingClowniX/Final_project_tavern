@@ -17,7 +17,3 @@ class MenuAdmin(admin.ModelAdmin):
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'title')
     list_display_links = ('id',)
-#
-#     list_display_links = ('id', 'title')
-#     list_filter = ('food',)
-#     search_fields = ('id', 'title')  # Добавить возможность поиска по названию

@@ -1,31 +1,31 @@
-@font-face {
-    font-family: 'Lighthaus';
-    src: local("Lighthaus"), url("../fonts/Lighthaus.ttf");
-}
-
 body {
     display: grid;
-  margin: 0;
-  padding: 0;
-  background-image: url("../img/wood.jpg");
-  background-repeat: repeat-y;
-  overflow-x: hidden;
-  width: 100%;
+    margin: 0;
+    padding: 0;
+    background-image: url("../img/wood.jpg");
+    background-repeat: repeat-y;
+    overflow-x: hidden;
+    width: 100%;
     height: 100%;
     background-size: 100%;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-.icon_basket{
-    border-radius: 40%;
 }
 .welcome{
     font-family: Lighthaus;
     width: 100%;
-	height: 0px;
-	top: 20%;
     position: absolute;
+	height: 0px;
+	top: 30%;
+	z-index: 999;
+    text-align: center;
+    color: coral;
+    text-shadow: 1px 1px 5px black;
+}
+.number{
+    font-family: Lighthaus;
+    width: 100%;
+    position: absolute;
+	height: 0px;
+    top: 900px;
 	z-index: 999;
     text-align: center;
     color: coral;
@@ -34,6 +34,7 @@ body {
 .welcome-head{
     font-family: Lighthaus;
     font-size: 25px;
+    position: fixed;
     width: 100%;
 	height: 0px;
 	top: 45%;
@@ -80,7 +81,9 @@ nav ul li a:hover {
   color: white;
     opacity: 0.7;
 }
-
+.icon_basket{
+    border-radius: 40%;
+}
 .footer{
     position: absolute;
 background:#000;
@@ -137,31 +140,17 @@ text-align:left;
 margin:0% 3%;
 }
 }
+iframe{
+    position: absolute;
+    margin-top: 20%;
+    z-index: 999;
+}
+.map{
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+}
 
 ::-webkit-scrollbar {
   width: 0;
-}
-.breadcrumbs{
-    color: bisque;
-}
-.news {
-    display: grid;
-    position: absolute;
-    grid-template-columns: 1fr 1fr;
-    text-align: center;
-    top: 35%;
-    width: 100%;
-    z-index: 997;
-    gap: 20px;
-}
-h4{
-    font-family: Lighthaus;
-    color: coral;
-    text-shadow: 1px 1px 20px black;
-}
-iframe{
-margin-left: 20%;
-}
-.tournament{
-    margin-left: 20%;
 }

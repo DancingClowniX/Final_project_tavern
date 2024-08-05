@@ -25,7 +25,7 @@
           <li class="last"><a href="{% url 'profile' %}">{{user.username}}</a></li>
       <li><a href="{% url 'logout' %}">Выйти</a></li>
       {% if cart.items.exists %}
-      <li class="icon_basket"><a href="/shop/cart"><button type="button" class="btn btn-warning position-relative"><img src="{% static 'img/icon/basket.png' %}" alt="" width="20px"><span class="position-absolute top-0 translate-middle badge rounded-pill bg-danger"><span class="visually-hidden">{{ cart.get_total_price }}</span></span></button></a></li>
+      <li class="icon_basket"><a href="/shop/cart"><button type="button" class="btn btn-warning position-relative"><img src="{% static 'img/icon/basket.png' %}" alt="" width="20px"><span class="position-absolute top-0 translate-middle badge rounded-pill bg-danger"><span>{{ cart.get_total_quantity }}</span></span></button></a></li>
       {% else %}
       <li class="icon_basket"><a href="/shop/cart"><button type="button" class="btn btn-warning position-relative"><img src="{% static 'img/icon/basket.png' %}" alt="" width="20px"><span class="position-absolute top-0 translate-middle badge rounded-pill bg-danger"></span></button></a></li>
       {% endif %}
