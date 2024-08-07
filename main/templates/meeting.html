@@ -30,8 +30,20 @@
                 allow="autoplay; encrypted-media;"></iframe>
   <img src="{{item.image.url}}" class="tournament" width="600px" height="400px"><br>
   {%endfor%}
-      <a href="#">Записаться на турнир</a><br>
-      <div class="person">{{ user.username }}</div>
+      <form method="post" action="{% url 'main:get_tournament_users' %}">
+          {% csrf_token %}
+      <button type="submit">Записаться на турнир</button><br>
+      </form>
+      <div class="person">{% if group %}
+          <ul><h4>Cписок участников</h4>
+        {% for item in group %}
+            <li><h4>{{ item.listPerson }}</h4></li>  <!-- Здесь отображается имя пользователя, записанного на турнир -->
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Вы еще не записаны на турниры.</p>
+    {% endif %}
+      </div>
 </div>
 
 {% endblock content1 %}

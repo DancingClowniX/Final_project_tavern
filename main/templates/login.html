@@ -7,7 +7,7 @@
 
 <div data-gb-custom-block data-tag="block" class="dj_map_wrapper">
 <h1 class="title">{{ title }}</h1>
-        <form method="post" action="{% url 'login' %}" class="form_auto">
+        <form method="post" action="{% url 'main:login' %}" class="form_auto">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit" class="glow-on-hover">Войти</button>

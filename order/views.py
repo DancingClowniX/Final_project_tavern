@@ -35,7 +35,7 @@ def add_payment(price, title, meta):
         "confirmation": {
             "type": "redirect",
             # "return_url": "http://127.0.0.1:8000/"
-            "return_url": "https://211d-109-124-252-122.ngrok-free.app/shop/cart/"
+            "return_url": "https://eb01-109-124-252-122.ngrok-free.app/shop/cart/"
         },
         "capture": True,
         "description": title,

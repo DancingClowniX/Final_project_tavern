@@ -24,3 +24,5 @@ urlpatterns = [
     path('reserved/', include('reserved.urls')),
     path('order/', include('order.urls')),
 ]
+handler404 = 'main.views.error_404'
+

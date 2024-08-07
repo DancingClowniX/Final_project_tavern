@@ -25,9 +25,9 @@ SECRET_KEY = 'django-insecure-=gyerlds##t=95wakceq5$7p(sh*4i#wt8^9q6sa*7#jg&8!da
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','211d-109-124-252-122.ngrok-free.app']
+ALLOWED_HOSTS = ['127.0.0.1','eb01-109-124-252-122.ngrok-free.app']
 
-CSRF_TRUSTED_ORIGINS = ['https://211d-109-124-252-122.ngrok-free.app']
+CSRF_TRUSTED_ORIGINS = ['https://eb01-109-124-252-122.ngrok-free.app']
 
 
 # Application definition
@@ -133,8 +133,5 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 LOGIN_REDIRECT_URL = 'main_url'
-LOGOUT_REDIRECT_URL = 'main_url'
 LOGIN_URL = 'templates'
-#LOGOUT_URL = "templates"
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-#npee anrm zebr qwon

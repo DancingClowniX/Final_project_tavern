@@ -1,32 +1,32 @@
-<!-- templates/users/profile.html -->
-<!DOCTYPE html>
+{% extends 'base.html' %}
 {% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Profile</title>
-    <link rel="stylesheet" href="{% static 'css/styleProf.css' %}" />
-</head>
-<body>
+{% block main_css %}
+    <link rel="stylesheet" href="{% static 'css/styleProf.css' %}"/>
+{% endblock %}
+{% block content1 %}
+    <div class="container">
+    <div class="title">
+<h1 class="welcome-head">Профиль</h1>
+    </div>
 
-<h1>Профиль</h1>
 <div class="prof">
 <form method="post" enctype="multipart/form-data">
-
     {% csrf_token %}
-    <div class="form-error">{{ form.non_field_errors }}</div>
+    <div class="form-input">{{ form.non_field_errors }}</div>
     {% for f in form %}
-    <p ><label class="form-label" for="{{ f.id_for_label }}">{{f.label}}: </label>{{ f }}</p>
-    <div class="form-error">{{ f.errors }}</div>
+    <p ><label class="form-input" for="{{ f.id_for_label }}">{{f.label}}: </label>{{ f }}</p>
+    <div class="form-input">{{ f.errors }}</div>
     {% endfor %}
-    {% if user.photo %}
-        <p ><img src="{{ user.photo.url }}">
-    {% else %}
-        <p ><img src="/media/users/default.png">
-    {% endif %}
     <p ><button type="submit">Сохранить</button></p>
-    <p><a href="{% url 'password_change' %}">Сменить пароль</a></p>
+    <button><a href="{% url 'main:password_change' %}">Сменить пароль</a></button>
 </form>
 </div>
-</body>
-</html>
+    <div class="order">
+    <h4>Завершенные заказы</h4>
+    {% for order in orders %}
+        <h4>Мерч: {{ order.orderItems }}</h4><br>
+        <h4>Сумма: {{ order.summa }}</h4><br>
+    {% endfor %}
+    </div>
+    </div>
+{% endblock %}

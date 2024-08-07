@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'cart', 'summa', 'create_order', 'ending_order',)
+    list_display = ('id', 'orderItems', 'summa', 'create_order', 'ending_order',)
     list_display_links = ('id',)
 
     def cart(self, obj):

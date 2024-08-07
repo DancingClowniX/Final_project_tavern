@@ -8,10 +8,10 @@
     <div class="container">
         <div class="content_crumbs">
                 <ol class="crumb">
-                    <li class="url"><a href="{% url 'main_url' %}"><p>Главная/</p></a></li>
+                    <li class="url"><a href="{% url 'main:main_url' %}"><p>Главная/</p></a></li>
                     <li class="url"><a href="#"><p>Категории/</p></a></li>
                     {% for item in category %}
-                    <li class="url"><a href="{% url 'show_cat' item.id %}"><p>{{ item.title }}/</p></a></li>
+                    <li class="url"><a href="{% url 'main:show_cat' item.id %}"><p>{{ item.title }}/</p></a></li>
                     {% endfor %}
                 </ol>
         </div>
@@ -22,9 +22,9 @@
                 {% for item in menu %}
                 <div class="col-xl-6 col-12">
                     <div class="menu-items">
-                        <a href="{% url 'show_food' item.id %}"><img src="{{ item.image.url }}" class="img_hover" height="200px" width="300px"></a>
+                        <a href="{% url 'main:show_food' item.id %}"><img src="{{ item.image.url }}" class="img_hover" height="200px" width="300px"></a>
                         <div class="d-flex flex-column">
-                            <h6><a href="{% url 'show_food' item.id %}">{{ item.title }}</a></h6>
+                            <h6><a href="{% url 'main:show_food' item.id %}">{{ item.title }}</a></h6>
                             <br>
                             <h6>Цена: {{ item.price }} Руб.</h6>
                         </div>

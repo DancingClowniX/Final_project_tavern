@@ -21,6 +21,7 @@ from shop.views import ShopPage
 from main.forms import UserPasswordChangeForm
 from django.contrib.auth.models import User
 from main.models import Tournament
+from order.models import Order
 
 
 def index(request):
@@ -56,12 +57,12 @@ def menu(request):
 
 class PageTemplate(TemplateView):
     template_name = 'meeting.html'
-    news_obj = News.objects.all
-    extra_context = {
-         'news': news_obj,
-    }
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['news'] = News.objects.all()
+        context['group'] = Tournament.objects.all()
+        print(context)
+        print(Tournament)
         try:
             cart = Cart.objects.get(user=self.request.user)
             context['cart'] = cart
@@ -71,6 +72,15 @@ class PageTemplate(TemplateView):
             return context
         finally:
             return context
+
+    def post(self, request, *args, **kwargs):
+        user = request.user
+        try:
+            Tournament.objects.get(listPerson=user.username)
+        except:
+            Tournament.objects.create(listPerson=user.username)
+        return redirect('main:get_tournament_users')
+
 
 
 def showCategory(request, category_id):
@@ -100,7 +110,7 @@ def showFood(request, eat_id):
             fb = get_object_or_404(Feedback, id=fb_id)
             if fb.user == request.user or request.user.is_staff:
                 fb.delete()
-                return redirect('show_food', eat_id=eat_id)
+                return redirect('main:show_food', eat_id=eat_id)
 
         else:
             form = AddFeedbackForm(request.POST)
@@ -109,7 +119,7 @@ def showFood(request, eat_id):
                 feedback_instance.food = menu_obj.id
                 feedback_instance.user = request.user
                 feedback_instance.save()
-                return redirect('show_food', eat_id=eat_id)
+                return redirect('main:show_food', eat_id=eat_id)
     else:
         form = AddFeedbackForm()
         data = {
@@ -133,18 +143,18 @@ class LoginPage(LoginView):
     extra_context = {'title': "Авторизация", 'form': form_class}
 
     def get_success_url(self):
-        return reverse_lazy('main_url') # перенаправляет на имя по адрессу ПРОверьте setting.py
+        return reverse_lazy('main:main_url') # перенаправляет на имя по адрессу ПРОверьте setting.py
 
 
 class RegisterUser(CreateView):
     form_class = RegisterUserForm
     template_name = 'register.html'
     extra_context = {'title': "Регистрация"}
-    success_url = reverse_lazy('login')
+    success_url = reverse_lazy('main:login')
 
 
 class LogoutUser(LogoutView):
-    next_page = reverse_lazy('main_url')
+    next_page = reverse_lazy('main:main_url')
 
 
 class LoginPage(LoginView):
@@ -153,34 +163,41 @@ class LoginPage(LoginView):
     extra_context = {"title":'Авторизация','form':form_class}
 
     def get_success_url(self):
-        return reverse_lazy('main_url') #Settings py
+        return reverse_lazy('main:main_url') #Settings py
 
 
 class RegisterUser(CreateView):
     form_class = RegisterUserForm
     template_name = 'register.html'
     extra_context = {'title': "Регистрация"}
-    success_url = reverse_lazy('login')
+    success_url = reverse_lazy('main:login')
 
 
 def logout_user(request):
     logout(request)
-    return HttpResponseRedirect(reverse('main_url'))
+    return HttpResponseRedirect(reverse('main:main_url'))
 
 
 class ProfileUser(LoginRequiredMixin, UpdateView):
     model = get_user_model()  # Используем модель пользователя
     form_class = ProfileUserForm  # Форма профиля пользователя
     template_name = 'profile.html'  # Шаблон для профиля пользователя
-    extra_context = {'title': "Профиль пользователя"} #'default_image': settings.DEFAULT_USER_IMAGE}
+
 
     # Метод для получения URL после успешного обновления профиля
     def get_success_url(self):
-        return reverse_lazy('profile')
+        return reverse_lazy('main:profile')
 
     # Метод для получения объекта текущего пользователя
     def get_object(self, queryset=None):
         return self.request.user
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        orders = Order.objects.filter(user=self.request.user)
+        context['orders'] = orders
+        return context
+
 
 def privacy(request):
     return render(request, 'privacy.html')
@@ -192,7 +209,8 @@ class UserPasswordChange(PasswordChangeView):
     extra_context = {'title': "Изменение пароля"}
 
     def get_success_url(self):
-        return reverse_lazy('password_change_done')
+        return reverse_lazy('main:password_change_done')
 
-
+def error_404(request, exception):
+    return render(request, '../templates/pageNotFound404.html', status=404)
 

@@ -165,3 +165,8 @@ margin-left: 20%;
 .tournament{
     margin-left: 20%;
 }
+ul li h6{
+    font-family: Lighthaus;
+    color: coral;
+    text-shadow: 1px 1px 20px black;
+}
