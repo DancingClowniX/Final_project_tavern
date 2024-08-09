@@ -23,10 +23,10 @@ from django.contrib.auth.models import User
 from main.models import Tournament
 from order.models import Order
 
-
+# Функция рендера главной страницы
 def index(request):
     try:
-        cart = Cart.objects.get(user=request.user)
+        cart = Cart.objects.get(user=request.user) #Передача модели корзины
         context = {
             'cart': cart,
         }
@@ -35,11 +35,11 @@ def index(request):
         return render(request, "main_page.html")
 
 
-
+# Функция рендера меню
 def menu(request):
-    menu = Menu.objects.all()
-    category = Category.objects.all()
-    try:
+    menu = Menu.objects.all() #Передача модели Меню
+    category = Category.objects.all() #Передача модели корзины
+    try: # Обработка исключений
         cart = Cart.objects.get(user=request.user)
         data = {
             "menu": menu,
@@ -47,14 +47,14 @@ def menu(request):
             'cart': cart,
         }
         return render(request, "menu.html", context=data)
-    except:
+    except: # Обработка исключений
         data = {
             "menu": menu,
             "category": category,
         }
         return render(request, "menu.html", context=data)
 
-
+# Инициирование класса Для мероприятия
 class PageTemplate(TemplateView):
     template_name = 'meeting.html'
     def get_context_data(self, **kwargs):
@@ -82,7 +82,7 @@ class PageTemplate(TemplateView):
         return redirect('main:get_tournament_users')
 
 
-
+# Функция по обработке категорий в хлебных крошках и отрисовыванию определеной категории блюда
 def showCategory(request, category_id):
     cat_obj = get_object_or_404(Category, id=category_id)
     menu_items = cat_obj.menu_set.all()
@@ -99,7 +99,7 @@ def showCategory(request, category_id):
     finally:
         return render(request, 'food.html', context=data)
 
-
+# Функция для отображения отзывов и отрисовки страницы определённого блюда
 def showFood(request, eat_id):
     menu_obj = get_object_or_404(Menu, id=eat_id)
     feedback_list = Feedback.objects.filter(food=eat_id)
@@ -136,7 +136,7 @@ def showFood(request, eat_id):
     finally:
         return render(request, 'food_item.html', context=data)
 
-
+# Инициализация формы Логина пользователя
 class LoginPage(LoginView):
     form_class = LoginUserForm
     template_name = 'login.html'
@@ -145,7 +145,7 @@ class LoginPage(LoginView):
     def get_success_url(self):
         return reverse_lazy('main:main_url') # перенаправляет на имя по адрессу ПРОверьте setting.py
 
-
+# Регистрация пользователя
 class RegisterUser(CreateView):
     form_class = RegisterUserForm
     template_name = 'register.html'
@@ -153,31 +153,12 @@ class RegisterUser(CreateView):
     success_url = reverse_lazy('main:login')
 
 
-class LogoutUser(LogoutView):
-    next_page = reverse_lazy('main:main_url')
-
-
-class LoginPage(LoginView):
-    form_class = LoginUserForm
-    template_name = '../templates/login.html'
-    extra_context = {"title":'Авторизация','form':form_class}
-
-    def get_success_url(self):
-        return reverse_lazy('main:main_url') #Settings py
-
-
-class RegisterUser(CreateView):
-    form_class = RegisterUserForm
-    template_name = 'register.html'
-    extra_context = {'title': "Регистрация"}
-    success_url = reverse_lazy('main:login')
-
-
+# Выход из текущей сессии
 def logout_user(request):
     logout(request)
     return HttpResponseRedirect(reverse('main:main_url'))
 
-
+# Инициализация Профиля
 class ProfileUser(LoginRequiredMixin, UpdateView):
     model = get_user_model()  # Используем модель пользователя
     form_class = ProfileUserForm  # Форма профиля пользователя
@@ -192,17 +173,31 @@ class ProfileUser(LoginRequiredMixin, UpdateView):
     def get_object(self, queryset=None):
         return self.request.user
 
+    # Метод для получения контента (моделей, и проч)
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         orders = Order.objects.filter(user=self.request.user)
         context['orders'] = orders
-        return context
+        try:
+            cart = Cart.objects.get(user=self.request.user)
+            context['cart'] = cart
+        except Cart.DoesNotExist:
+            cart = None
+            context['cart'] = cart
+            return context
+        finally:
+            return context
 
-
+# Рендеринг Политики конфеденциальности
 def privacy(request):
     return render(request, 'privacy.html')
+
+
+# Рендеринг Контактной информации
 def contacts(request):
     return render(request, 'contacts.html')
+
+# Инициализация смены пароля
 class UserPasswordChange(PasswordChangeView):
     form_class = UserPasswordChangeForm
     template_name = 'password_change_form.html'
@@ -211,6 +206,7 @@ class UserPasswordChange(PasswordChangeView):
     def get_success_url(self):
         return reverse_lazy('main:password_change_done')
 
+# Инициализация обработки неправильного url
 def error_404(request, exception):
     return render(request, '../templates/pageNotFound404.html', status=404)
 

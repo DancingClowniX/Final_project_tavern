@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from shop.models import Cart
 
-
+# Инициализация модели Заказа
 class Order(models.Model):
 
 
@@ -22,7 +22,7 @@ class Order(models.Model):
     def __str__(self):
         return str(self.id)
 
-
+# Инициализация модели Статуса оплаты
 class PaymentStatus(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     is_payment_complete = models.BooleanField(default=False)

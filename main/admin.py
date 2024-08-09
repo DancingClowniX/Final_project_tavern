@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import News,Menu,Category
-# Register your models here.
+# Зарегистрированы модели Новостей/турнира, Меню, Категорий
 @admin.register(News)
 class NewsAdmin(admin.ModelAdmin):
     list_display = ('id', 'image', 'title', 'text')

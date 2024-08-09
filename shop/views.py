@@ -10,6 +10,8 @@ from shop.models import Goods
 from django.core.paginator import Paginator,PageNotAnInteger, EmptyPage
 from django.contrib.auth.mixins import LoginRequiredMixin
 from order.models import Order
+
+# Инициализация корзины и передача моделей для рендеринга
 class ShoppingCart(TemplateView):
     model = get_user_model()  # Используем модель пользователя
     template_name = 'cart.html'  # Шаблон для профиля пользователя
@@ -23,6 +25,7 @@ class ShoppingCart(TemplateView):
     def get_object(self, queryset=None):
         return self.request.user
 
+    # Метод для получения данных заполненности карты
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         try:
@@ -33,7 +36,7 @@ class ShoppingCart(TemplateView):
         return context
 
 
-
+# Инициализация Страницы магазина и пагинация товаров
 class ShopPage(TemplateView):
     template_name = 'shop.html'
     def get_context_data(self, **kwargs):
@@ -82,6 +85,7 @@ class ShopPage(TemplateView):
         finally:
             return context
 
+# метод добавления товара в корзину
 @login_required
 def add_to_cart(request, product_id):
     product = get_object_or_404(Goods, id=product_id)
@@ -92,7 +96,7 @@ def add_to_cart(request, product_id):
     cart.save()
     return redirect('shop:shop_cart')
 
-
+# метод удаления товара из корзины
 @login_required
 def remove_from_cart(request, product_id):
     cart = get_object_or_404(Cart, user=request.user)
@@ -100,7 +104,7 @@ def remove_from_cart(request, product_id):
     cart_item.delete()
     return redirect('shop:shop_cart')
 
-
+# метод прибавления 1 товара в корзину
 @login_required
 def increase(request, product_id):
     cart = get_object_or_404(Cart, user=request.user)
@@ -110,6 +114,7 @@ def increase(request, product_id):
     cart.save()
     return redirect('shop:shop_cart')
 
+# метод удаления 1 товара в корзины
 @login_required
 def decrease(request, product_id):
     cart = get_object_or_404(Cart, user=request.user)

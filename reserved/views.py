@@ -7,6 +7,7 @@ from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 from reserved.models import Table
 
+# Рендеринг страницы бронирования и передача модели столов
 class reserved_main(TemplateView):
     template_name = 'reserved.html'
     table = Table.objects.all()

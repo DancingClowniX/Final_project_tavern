@@ -16,7 +16,7 @@ from .forms import ProfileUserForm
 from main.views import index
 from django.test import TransactionTestCase
 
-
+# Написан тест (не функционален)
 def test_views_correct_template(self):
     '''URL-адрес использует соответствующий шаблон.'''
     templates_url_names = {

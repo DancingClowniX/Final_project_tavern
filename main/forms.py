@@ -7,11 +7,12 @@ import datetime
 from django.contrib.auth import get_user_model
 from django.contrib.auth.views import PasswordChangeForm, SetPasswordForm, PasswordResetForm
 
+#Инициализирована форма логина Пользователя
 class LoginUserForm(AuthenticationForm):
     username = forms.CharField(label='Логин или Email', widget=forms.TextInput(attrs={'class': 'form-input'}))
     password = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-input'}))
 
-
+#Инициализирована форма Регистрации Пользователя
 class RegisterUserForm(UserCreationForm):
     username = forms.CharField(label='Логин', widget=forms.TextInput(attrs={'class': 'form-input'}))
     password1 = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-input'}))
@@ -27,18 +28,21 @@ class RegisterUserForm(UserCreationForm):
             'email': forms.TextInput(attrs={'class': 'form-input'}),
         }
 
+    # Инициализирован метод очистки email и проверку на уникальность
     def clean_email(self):
         email = self.cleaned_data['email']
         if User.objects.filter(email=email).exists():# проверка на уникальность email
             raise forms.ValidationError("Такой E-mail уже существует!")
         return email
 
+#Инициализирована форма Профиля Пользователя
 class ProfileUserForm(forms.ModelForm):
     username = forms.CharField(disabled=True, label='Логин', widget=forms.TextInput(attrs={'class': 'form-input'}))
     email = forms.CharField(disabled=True, label='E-mail', widget=forms.EmailInput(attrs={'class': 'form-input'}))
     this_year = datetime.date.today().year
     date_birth = forms.DateField(widget=forms.SelectDateWidget(years=tuple(range(this_year - 100, this_year - 5))))
 
+    # Установлена связь формы Профиля с моделью Пользователя и отрисовка атрибутов для шаблонов html
     class Meta:
         model = get_user_model()
         fields = ['photo', 'username', 'email', 'date_birth', 'first_name', 'last_name']
@@ -54,5 +58,6 @@ class ProfileUserForm(forms.ModelForm):
             'first_name': forms.TextInput(attrs={'class': 'form-input'}),
             'last_name': forms.TextInput(attrs={'class': 'form-input'}),
         }
+#Инициализирована форма смены пароля
 class UserPasswordChangeForm(PasswordChangeForm):
     old_password = forms.CharField(label = 'Старый пароль', widget = forms.PasswordInput(attrs={'class':'form-input'}))

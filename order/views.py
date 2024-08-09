@@ -1,8 +1,6 @@
 import uuid
 from django.shortcuts import Http404,HttpResponse
 from django.urls import reverse_lazy
-# from payment.views import create_payment, refund_payment
-# from payment.views import email_client
 from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404
 from django.db import transaction
@@ -19,11 +17,13 @@ from shop.models import Goods
 from django.contrib.auth.models import User
 import datetime
 from django.contrib.contenttypes.models import ContentType
+import requests
 
-
+# Данные для Ю-касса для связи с сайтом
 Configuration.account_id = "433859"
 Configuration.secret_key = "test_HOkl1FeKmf7MzVWittmOSNsTX_Ds2izw8oPz92Ly6mI"
 
+# Функция добавления платежа на Юкасса
 def add_payment(price, title, meta):
     payment_id = str(uuid.uuid4())
 
@@ -34,8 +34,7 @@ def add_payment(price, title, meta):
         },
         "confirmation": {
             "type": "redirect",
-            # "return_url": "http://127.0.0.1:8000/"
-            "return_url": "https://eb01-109-124-252-122.ngrok-free.app/shop/cart/"
+            "return_url": "https://dancingclownix.pythonanywhere.com/shop/cart/"
         },
         "capture": True,
         "description": title,
@@ -43,7 +42,7 @@ def add_payment(price, title, meta):
     }, payment_id)
     return payment
 
-
+# Функция оплаты товара
 @login_required
 def cart_pay(request, cart_id):
     cart = get_object_or_404(Cart, id=cart_id)
@@ -61,9 +60,19 @@ def cart_pay(request, cart_id):
 
     return redirect(payment.confirmation.confirmation_url)
 
+# Функция отправки в tg bot данных
+def send_telegram_message(text):
+    token = '7295540178:AAF9W6cL5XKLf1M6dKXCGk1nt5jaAUkmGl0'
+    chat_id = '755109015'
+    url = f"https://api.telegram.org/bot{token}/sendMessage"
+    payload = {
+        'chat_id': chat_id,
+        'text': text
+    }
+    response = requests.post(url, json=payload)
+    return response.json()
 
-
-
+# Функция обработки платежа и обращения к api telegramm
 @csrf_exempt
 def webhook(request):
     if request.method == 'POST':
@@ -93,8 +102,13 @@ def webhook(request):
                 product.save()
 
             sum_ = float(payment_object['amount']['value'])
+            message = f"Пользователь {user.username}, {user.email} произвел оплату мерча: {orderItems} на сумму: {sum_}"
             Order.objects.create(user=user, orderItems=orderItems, summa=sum_, is_payment=True)
             cart.items.all().delete()
+            try:
+                send_telegram_message(message)
+            except Exception:
+                pass
 
             return HttpResponse(status=200)
         else:
