@@ -25,9 +25,9 @@ SECRET_KEY = 'django-insecure-=gyerlds##t=95wakceq5$7p(sh*4i#wt8^9q6sa*7#jg&8!da
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['DancingClowniX.pythonanywhere.com']
+ALLOWED_HOSTS = ['127.0.0.1']
 
-CSRF_TRUSTED_ORIGINS = ['https://DancingClowniX.pythonanywhere.com']
+CSRF_TRUSTED_ORIGINS = []
 
 
 # Application definition
